@@ -1,3 +1,8 @@
+// Dispatch table T: one char per opcode byte, v=charCode-33. im=v%5 is the
+// immediate length (0-4 bytes), po=(v/5|0)%4 the values popped (0-3), and
+// pu=(v/20|0) the values pushed. A char below '!' (or past the end of T)
+// gives v<0: an unknown opcode, trap 5. Stack bounds (traps 2/3) and the
+// immediate fit (trap 9) are checked from im/po/pu before each instruction.
 import{mkdirSync,readdirSync,readFileSync,writeFileSync}from'node:fs';
 import{join}from'node:path';
 const I=process.env.MAKEFUN_INPUT_DIR??'/input',O=process.env.MAKEFUN_OUTPUT_DIR??'/output',T="!69&NSgl        ???????:???:??? ???             #((#!           :+              &&5&";
